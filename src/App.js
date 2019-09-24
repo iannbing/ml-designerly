@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Global, css } from '@emotion/core';
 
-import ImagePlaceHolder from './components/ImagePlaceHolder';
+import DropZone from './components/DropZone';
+import Images from './components/Images';
 
 const globalStyle = css`
   * {
@@ -11,10 +12,13 @@ const globalStyle = css`
 `;
 
 function App() {
+  const [images, setImages] = useState([]);
+
   return (
     <div>
       <Global styles={globalStyle} />
-      <ImagePlaceHolder />
+      <DropZone setImages={setImages} />
+      <Images data={images}></Images>
     </div>
   );
 }
