@@ -15,6 +15,12 @@ const imageStyle = css`
   border-radius: 8px;
 `;
 
+const predictionStyle = css`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
 export default class Image extends Component {
   state = { predictions: [] };
 
@@ -49,8 +55,9 @@ export default class Image extends Component {
           const { label, confidence } = pred;
           const roundedConfidence = Math.floor(confidence * 10000) / 100 + '%';
           return (
-            <div key={i}>
-              {i + 1}. Prediction: {label} at {roundedConfidence}
+            <div key={i} css={predictionStyle}>
+              <span>{label}</span>
+              <span>{roundedConfidence}</span>
             </div>
           );
         })}
