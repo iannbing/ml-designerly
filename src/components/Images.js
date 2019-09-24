@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { setState } from 'react';
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
+
+import Image from './Image';
 
 const containerStyle = css`
   display: flex;
@@ -10,25 +12,16 @@ const containerStyle = css`
   width: 100%;
   justify-content: flex-start;
   align-items: center;
+  list-style: none;
 `;
 
-const imageStyle = css`
-  width: 200px;
-  box-shadow: 0px 0px 13px -1px rgba(0, 0, 0, 0.4);
-  margin: 16px;
-  border-radius: 8px;
-`;
-
-const Images = ({ data }) => {
+const Images = ({ data, classifier }) => {
   return (
     <ul css={containerStyle}>
       {data.map(image => (
-        <img
-          key={image.id}
-          alt={`img - ${image.id}`}
-          src={image.src}
-          css={imageStyle}
-        />
+        <li key={image.id}>
+          <Image id={image.id} src={image.src} classifier={classifier}></Image>
+        </li>
       ))}
     </ul>
   );
