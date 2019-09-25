@@ -1,11 +1,9 @@
-import React, { setState } from 'react';
-
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import React from 'react';
+import styled from '@emotion/styled';
 
 import ImageWithPredictions from './ImageWithPredictions';
 
-const containerStyle = css`
+const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
@@ -17,7 +15,7 @@ const containerStyle = css`
 
 const Images = ({ data, classifier }) => {
   return (
-    <ul css={containerStyle}>
+    <List>
       {data.map(image => (
         <li key={image.id}>
           <ImageWithPredictions
@@ -27,7 +25,7 @@ const Images = ({ data, classifier }) => {
           ></ImageWithPredictions>
         </li>
       ))}
-    </ul>
+    </List>
   );
 };
 
