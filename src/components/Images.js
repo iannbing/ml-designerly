@@ -3,7 +3,7 @@ import React, { setState } from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 
-import Image from './Image';
+import ImageWithPredictions from './ImageWithPredictions';
 
 const containerStyle = css`
   display: flex;
@@ -20,7 +20,11 @@ const Images = ({ data, classifier }) => {
     <ul css={containerStyle}>
       {data.map(image => (
         <li key={image.id}>
-          <Image id={image.id} src={image.src} classifier={classifier}></Image>
+          <ImageWithPredictions
+            id={image.id}
+            src={image.src}
+            classifier={classifier}
+          ></ImageWithPredictions>
         </li>
       ))}
     </ul>

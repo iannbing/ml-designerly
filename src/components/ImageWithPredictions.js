@@ -21,7 +21,7 @@ const predictionStyle = css`
   padding: 10px;
 `;
 
-export default class Image extends Component {
+export default class ImageWithPredictions extends Component {
   state = { predictions: [] };
 
   constructor(props) {
