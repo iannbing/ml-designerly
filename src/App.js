@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Global, css } from '@emotion/core';
 import * as ml5 from 'ml5';
 
@@ -12,24 +12,26 @@ const globalStyle = css`
   }
 `;
 
-// Initialize the Image Classifier method with MobileNet
-
 const initClassifier = callback =>
   ml5.imageClassifier('MobileNet', () => callback && callback());
-
-let classifier;
 
 function App() {
   const [images, setImages] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  classifier = classifier || initClassifier(() => setLoaded(true));
+  const classifierRef = useRef();
+
+  useEffect(() => {
+    classifierRef.current = initClassifier(() => setLoaded(true));
+  }, []);
 
   return (
     <div>
       <Global styles={globalStyle} />
       {!loaded && <h1>Loading ml5 model...</h1>}
       {loaded && <DropZone setImages={setImages} />}
-      {loaded && <Images data={images} classifier={classifier}></Images>}
+      {loaded && (
+        <Images data={images} classifier={classifierRef.current}></Images>
+      )}
     </div>
   );
 }
