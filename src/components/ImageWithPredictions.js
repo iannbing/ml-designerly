@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import React, { useRef, useState, useEffect } from 'react';
+import styled from '@emotion/styled';
 
 const classifyImg = (classifier, image) =>
   classifier.predict(image, 5, (err, results) => {
@@ -8,60 +7,45 @@ const classifyImg = (classifier, image) =>
     return results;
   });
 
-const imageStyle = css`
+const Img = styled.img`
   width: 200px;
   box-shadow: 0px 0px 13px -1px rgba(0, 0, 0, 0.4);
   margin: 16px;
   border-radius: 8px;
 `;
 
-const predictionStyle = css`
+const Prediction = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
 `;
 
-export default class ImageWithPredictions extends Component {
-  state = { predictions: [] };
+const ImageWithPredictions = ({ classifier, id, src }) => {
+  const imgRef = useRef();
+  const [predictions, setPredictions] = useState([]);
+  useEffect(() => {
+    const generatePredictions = async () => {
+      const predictions = await classifyImg(classifier, imgRef.current);
+      setPredictions(predictions);
+    };
+    generatePredictions();
+  }, [classifier]);
 
-  constructor(props) {
-    super(props);
-    this.imgRef = React.createRef();
-  }
+  return (
+    <div>
+      <Img key={id} alt={`img - ${id}`} src={src} ref={imgRef} />
+      {predictions.map((pred, i) => {
+        const { label, confidence } = pred;
+        const roundedConfidence = Math.floor(confidence * 10000) / 100 + '%';
+        return (
+          <Prediction key={i}>
+            <span>{label}</span>
+            <span>{roundedConfidence}</span>
+          </Prediction>
+        );
+      })}
+    </div>
+  );
+};
 
-  componentDidMount() {
-    this.generatePredictions();
-  }
-
-  generatePredictions = async () => {
-    const { classifier } = this.props;
-    const predictions = await classifyImg(classifier, this.imgRef.current);
-    this.setState({ predictions });
-  };
-
-  render() {
-    const { id, src } = this.props;
-    const { predictions } = this.state;
-    return (
-      <div>
-        <img
-          key={id}
-          alt={`img - ${id}`}
-          src={src}
-          css={imageStyle}
-          ref={this.imgRef}
-        />
-        {predictions.map((pred, i) => {
-          const { label, confidence } = pred;
-          const roundedConfidence = Math.floor(confidence * 10000) / 100 + '%';
-          return (
-            <div key={i} css={predictionStyle}>
-              <span>{label}</span>
-              <span>{roundedConfidence}</span>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-}
+export default ImageWithPredictions;
