@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/static/js/main.372efde3.chunk.js",
-    "main.js.map": "/static/js/main.372efde3.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.d9dd6c06.js",
-    "runtime-main.js.map": "/static/js/runtime-main.d9dd6c06.js.map",
-    "static/js/2.88edae0c.chunk.js": "/static/js/2.88edae0c.chunk.js",
-    "static/js/2.88edae0c.chunk.js.map": "/static/js/2.88edae0c.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.53fd655ae393d25fd4e131f07ac3e161.js": "/precache-manifest.53fd655ae393d25fd4e131f07ac3e161.js",
-    "service-worker.js": "/service-worker.js"
+    "main.js": "/ml-designerly/static/js/main.a0b57fbd.chunk.js",
+    "main.js.map": "/ml-designerly/static/js/main.a0b57fbd.chunk.js.map",
+    "runtime-main.js": "/ml-designerly/static/js/runtime-main.f3a7e7a6.js",
+    "runtime-main.js.map": "/ml-designerly/static/js/runtime-main.f3a7e7a6.js.map",
+    "static/js/2.88edae0c.chunk.js": "/ml-designerly/static/js/2.88edae0c.chunk.js",
+    "static/js/2.88edae0c.chunk.js.map": "/ml-designerly/static/js/2.88edae0c.chunk.js.map",
+    "index.html": "/ml-designerly/index.html",
+    "precache-manifest.3be19058925b477a645c04cbce90021b.js": "/ml-designerly/precache-manifest.3be19058925b477a645c04cbce90021b.js",
+    "service-worker.js": "/ml-designerly/service-worker.js"
   }
 }
